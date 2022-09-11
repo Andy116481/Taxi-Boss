@@ -1,0 +1,39 @@
+if getgenv().Start_Stop == true then
+	if getgenv().Start_Stop == false then return end
+	game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
+		prompt.HoldDuration = 0
+	end)
+	local GetCar = function()
+		local Car = nil;
+		for i,v in pairs(workspace.Vehicles:GetChildren()) do
+			if (v:FindFirstChild'Server' and v.Server:FindFirstChild'Player' and v.Server.Player.Value == game.Players.LocalPlayer) then
+				Car = v;
+			end
+		end;
+		return Car
+	end;
+
+	local Customer = function(car)
+		local Target = nil;
+		for i,v in pairs(workspace.NewCustomers:GetChildren()) do
+			if car and v:FindFirstChild'Part' and v.Part:GetAttribute('Rating') >= LowestRating and v.Part:GetAttribute('Rating') <= HighestRating then
+				Target = v;
+			end
+		end
+		return Target
+	end;
+	local playerCar = GetCar() -- gets the player car
+	local targetCustomer = Customer(playerCar) -- gets the target customer
+
+	playerCar:SetPrimaryPartCFrame(targetCustomer.Part.CFrame)
+	wait(.2)
+	local virtualUser = game:GetService('VirtualUser')
+	virtualUser:CaptureController()
+	virtualUser:SetKeyDown('0x72')
+	wait(.1)
+	virtualUser:SetKeyUp('0x72')
+	wait(5.8)
+	playerCar:SetPrimaryPartCFrame(game:GetService("Workspace").ParkingMarkers.destinationPart.CFrame)
+	wait(4.2)
+	game:GetService("ReplicatedStorage").CustomerMissions.CustomerMissionEnd:InvokeServer()
+end
