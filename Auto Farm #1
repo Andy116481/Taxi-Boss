@@ -32,8 +32,8 @@ if getgenv().Start_Stop == true then
 	virtualUser:SetKeyDown('0x72')
 	wait(.1)
 	virtualUser:SetKeyUp('0x72')
-	wait(5.8)
+	wait(6)
 	playerCar:SetPrimaryPartCFrame(game:GetService("Workspace").ParkingMarkers.destinationPart.CFrame)
-	wait(4.2)
+	wait(5)
 	game:GetService("ReplicatedStorage").CustomerMissions.CustomerMissionEnd:InvokeServer()
 end
