@@ -34,18 +34,3 @@ wait(5.8)
 playerCar:SetPrimaryPartCFrame(game:GetService("Workspace").ParkingMarkers.destinationPart.CFrame)
 wait(4.2)
 game:GetService("ReplicatedStorage").CustomerMissions.CustomerMissionEnd:InvokeServer()
-
--- local GetCar = function()
--- 	local Car = nil;
--- 	for i,v in pairs(workspace.Vehicles:GetChildren()) do
--- 		if (v:FindFirstChild'Server' and v.Server:FindFirstChild'Player' and v.Server.Player.Value == game.Players.LocalPlayer) then
--- 			Car = v;
--- 		end
--- 	end;
--- 	return Car
--- end;
--- local playerCar = GetCar() -- gets the player car
--- wait(5.8)
--- playerCar:SetPrimaryPartCFrame(game:GetService("Workspace").ParkingMarkers.destinationPart.CFrame)
--- wait(4.5)
--- game:GetService("ReplicatedStorage").CustomerMissions.CustomerMissionEnd:InvokeServer()
